@@ -1,0 +1,47 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+ }
+ #canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+ }
+ nav {
+   color: white;
+   z-index: 2;
+   position: relative;
+   padding: 4rem 8rem;
+   display: flex;
+   justify-content: space-between;
+ }
+
+ nav a {
+   text-decoration: none;
+   color: white;
+   font-weight: bold;
+ }
+
+ nav ul {
+   list-style: none;
+   display: flex;
+   gap: 4rem;
+ }
+
+ .title {
+   color: white;
+   z-index: 2;
+   position: absolute;
+   font-size: 3rem;
+   left: 50%;
+   top: 80%;
+   transform: translate(-50%, -80%);
+ }
+ .dg.ac{
+z-index: 1 !important;
+ }
