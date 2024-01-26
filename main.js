@@ -208,9 +208,9 @@ if (webGLCompatibility) {
     modelControls.maxDistance = initialMaxZoom;
     gui.hide();
     window.addEventListener('click', (event)=>{
-        if(event.ctrlKey){
+        if(event.ctrlKey && event.metaKey){
             gui.show();
-        }else if(event.altKey){
+        }else if(event.altKey && event.metaKey){
             gui.hide();
         }
     })
