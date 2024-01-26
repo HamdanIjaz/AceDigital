@@ -121,7 +121,7 @@ if (webGLCompatibility) {
     const loader = new GLTFLoader();
     let mixer;
     loader.setDRACOLoader(dracoLoader);
-    loader.load('./Ace_Apartment.glb', function (gltfModel) {
+    loader.load('./Ace_Apartment_Model.glb', function (gltfModel) {
         const model = gltfModel.scene;
         console.log(model);
         model.scale.set(0.4, 0.4, 0.4);
