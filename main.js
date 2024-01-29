@@ -121,13 +121,14 @@ if (webGLCompatibility) {
     const loader = new GLTFLoader();
     let mixer;
     loader.setDRACOLoader(dracoLoader);
-    loader.load('./Ace_Apartment_Model.glb', function (gltfModel) {
+    loader.load('./Ace Apartment_GLB Embeded_M01.glb', function (gltfModel) {
         const model = gltfModel.scene;
-        //console.log(model);
+        console.log(model);
         model.scale.set(0.4, 0.4, 0.4);
         model.traverse((child) => {
             if (child.isMesh) {
                 const material = child.material;
+               
                 child.castShadow = true;
                 child.receiveShadow = true;
                 // if (child.name === "Mirriors&Stairs_Alpha") {
@@ -171,11 +172,17 @@ if (webGLCompatibility) {
                 // }
 
                 if (material) {
+                    if(child.name == 'Curtons_Transparent'){
+                        console.log(material);
+                        material.transparent = true;
+                        material.opacity = 0.8
+                    }
                     // console.log(lightMapTexture)
                     //material.map = lightMapTexture;
                     //material.envMap = cubeTexture;
                     // material.emissive = new THREE.Color(0xff5500);
                     // material.emissiveIntensity = 0.009;
+                    
                     material.metalness = 0;
                     material.roughness = 1;
                 }
