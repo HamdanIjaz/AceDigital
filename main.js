@@ -185,10 +185,11 @@ if (webGLCompatibility) {
         animate();
 
     }, function ( xhr ) {
-        var loadingPercentage = (xhr.loaded / xhr.total) * 100;
+        var loadingPercentage = xhr.loaded / (xhr.total * 100);
 
-        document.getElementById('loading').innerHTML = 'The model is ' + Math.floor(loadingPercentage) + '% loaded.';
-        if(loadingPercentage >= 100){
+        if(loadingPercentage <= 100){
+            document.getElementById('loading').innerHTML = 'The model is ' + Math.floor(loadingPercentage) + '% loaded.';
+        }else {
             setTimeout(()=>{
                 document.getElementById('loading').style.display = "none";
             }, 1000);
