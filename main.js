@@ -186,8 +186,8 @@ if (webGLCompatibility) {
 
     }, function ( xhr ) {
         var loadingPercentage = xhr.loaded / xhr.total * 100;
-        document.getElementById('loading').innerHTML = 'The model is ' + loadingPercentage + '% loaded.';
-        if(loadingPercentage == 100){
+        document.getElementById('loading').innerHTML = 'The model is ' + Math.floor(loadingPercentage) + '% loaded.';
+        if(loadingPercentage >= 100){
             setTimeout(()=>{
                 document.getElementById('loading').style.display = "none";
             }, 1000);
