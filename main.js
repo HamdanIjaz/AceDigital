@@ -172,11 +172,11 @@ if (webGLCompatibility) {
                 // }
 
                 if (material) {
-                    if(child.name == 'Curtons_Transparent'){
-                        console.log(material);
-                        material.transparent = true;
-                        material.opacity = 0.8
-                    }
+                    // if(child.name == 'Curtons_Transparent'){
+                    //     console.log(material);
+                    //     material.transparent = true;
+                    //     material.opacity = 0.8
+                    // }
                     // console.log(lightMapTexture)
                     //material.map = lightMapTexture;
                     //material.envMap = cubeTexture;
