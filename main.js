@@ -186,7 +186,6 @@ if (webGLCompatibility) {
 
     }, function ( xhr ) {
         var loadingPercentage = xhr.loaded * 100 / xhr.total;
-
         if( Math.floor(loadingPercentage) <= 100){
             document.getElementById('loading').innerHTML = 'The floor is ' + Math.floor(loadingPercentage) + '% loaded.';
         }else {
@@ -194,7 +193,6 @@ if (webGLCompatibility) {
                 document.getElementById('loading').style.display = "none";
             }, 1000);
         }
-        //console.log( ( loadingPercentage ) + '% loaded' );
     }, function (error) {
         console.error(error);
     });
