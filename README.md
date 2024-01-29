@@ -6,4 +6,4 @@
  - ```npx vite ``` to start the local server for the project.
 
 *Extra:*
- - ```npx build``` to make the build folder of the project.
+ - ```npx vite build``` to make the build folder of the project.
