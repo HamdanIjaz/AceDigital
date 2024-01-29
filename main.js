@@ -74,14 +74,14 @@ if (webGLCompatibility) {
     const environment = new DebugEnvironment(renderer);
     environment.children.forEach((child) => {
         if(child.isPointLight){
-            console.log(child);
+            //console.log(child);
             child.intensity = 1;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
-    console.log(scene.environment, scene );
+    //console.log(scene.environment, scene );
     
-    console.log(environment);
+    //console.log(environment);
     //document.body.appendChild(renderer.domElement);
    
     var params = {
@@ -123,7 +123,7 @@ if (webGLCompatibility) {
     loader.setDRACOLoader(dracoLoader);
     loader.load('./Ace_Apartment_Model.glb', function (gltfModel) {
         const model = gltfModel.scene;
-        console.log(model);
+        //console.log(model);
         model.scale.set(0.4, 0.4, 0.4);
         model.traverse((child) => {
             if (child.isMesh) {
@@ -184,7 +184,16 @@ if (webGLCompatibility) {
         scene.add(model);
         animate();
 
-    }, undefined, function (error) {
+    }, function ( xhr ) {
+        var loadingPercentage = xhr.loaded / xhr.total * 100;
+        document.getElementById('loading').innerHTML = 'The model is ' + loadingPercentage + '% loaded.';
+        if(loadingPercentage == 100){
+            setTimeout(()=>{
+                document.getElementById('loading').style.display = "none";
+            }, 1000);
+        }
+        //console.log( ( loadingPercentage ) + '% loaded' );
+    }, function (error) {
         console.error(error);
     });
     camera.position.x = 4;
