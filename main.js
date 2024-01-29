@@ -186,7 +186,7 @@ if (webGLCompatibility) {
 
     }, function ( xhr ) {
         console.log(xhr);
-        var loadingPercentage = xhr.loaded / (xhr.total * 100);
+        var loadingPercentage = xhr.loaded * 100 / xhr.total;
 
         if(loadingPercentage <= 100){
             document.getElementById('loading').innerHTML = 'The model is ' + Math.floor(loadingPercentage) + '% loaded.';
