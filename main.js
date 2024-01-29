@@ -185,7 +185,7 @@ if (webGLCompatibility) {
         animate();
 
     }, function ( xhr ) {
-        console.log(xhr.loaded, xhr.total);
+        console.log(xhr);
         var loadingPercentage = xhr.loaded / (xhr.total * 100);
 
         if(loadingPercentage <= 100){
