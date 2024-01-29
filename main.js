@@ -187,7 +187,7 @@ if (webGLCompatibility) {
     }, function ( xhr ) {
         var loadingPercentage = xhr.loaded * 100 / xhr.total;
 
-        if(loadingPercentage <= 100){
+        if( Math.floor(loadingPercentage) <= 100){
             document.getElementById('loading').innerHTML = 'The floor is ' + Math.floor(loadingPercentage) + '% loaded.';
         }else {
             setTimeout(()=>{
