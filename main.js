@@ -75,7 +75,7 @@ if (webGLCompatibility) {
     environment.children.forEach((child) => {
         if(child.isPointLight){
             //console.log(child);
-            child.intensity = 1;
+            child.intensity = 1.5;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
