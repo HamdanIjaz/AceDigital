@@ -1,5 +1,6 @@
 *Prerequisites:*
  - Node Js
+
 *Commands:*
  - ```npm i ``` to install all the necessary libraries.
  - ```npx vite ``` to start the local server for the project.
