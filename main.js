@@ -35,7 +35,7 @@ if (webGLCompatibility) {
     const camera = new THREE.PerspectiveCamera(fieldOfView, aspectRatio, near, far);
     const canvas = document.querySelector("#canvas");
     const container = document.getElementById('container');
-
+    let pointLight;
     const loadingManager = new THREE.LoadingManager();
 
     //container.appendChild(stats.dom);
@@ -47,12 +47,26 @@ if (webGLCompatibility) {
     const environment = new DebugEnvironment(renderer);
     environment.children.forEach((child) => {
         if (child.isPointLight) {
-            child.intensity = 1.5;
+            pointLight = child;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
     //console.log(scene.environment, scene );
+    var param = {
+        color: 0xf0e5dd
+    };
+    console.log(pointLight)
+    pointLight.intensity = 1.5;
+    pointLight.color.set(param.color);
+    gui.addColor(param, 'color').onChange(function () {
+        pointLight.color.set(param.color);
+        scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
 
+    });
+    gui.add(pointLight, "intensity").min(-10).max(1000).name("environmentLight").onChange(function(){
+    scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
+
+    });
     //console.log(environment);
     //document.body.appendChild(renderer.domElement);
 
@@ -102,7 +116,7 @@ if (webGLCompatibility) {
                 if (val.id === floorNum) {
                     loader.load(val.name, function (gltfModel) {
                         currentFloor = gltfModel.scene;
-                        
+
                         currentFloor.scale.set(0.4, 0.4, 0.4);
                         currentFloor.traverse((child) => {
                             if (child.isMesh) {
@@ -114,8 +128,9 @@ if (webGLCompatibility) {
                                     material.roughness = 1;
                                 }
                                 console.log(child)
-                                if(child.name === 'Curtons_Transparent001' || child.name === 'Curtons_Transparent002'){
-                                    // material.opacity = 0.1;
+                                if (child.name === "Curtons_Transparent") {
+                                    material.transparent = true;
+                                    material.opacity = 0.7;
                                 }
                             }
                         })
@@ -129,6 +144,7 @@ if (webGLCompatibility) {
                             document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
                         } else {
                             setTimeout(() => {
+                                document.getElementById('nav').style.display = "none";
                                 document.getElementById('loading').style.display = "none";
                                 console.log(document.getElementById('loading').style);
                             }, 1500);
@@ -192,7 +208,7 @@ if (webGLCompatibility) {
         if (selectedFloor) {
             selectedFloor += num;
         }
-       
+
         loadModel(selectedFloor);
     }
     function nextFloor(num) {
@@ -201,10 +217,10 @@ if (webGLCompatibility) {
         }
         loadModel(selectedFloor);
     }
-    backButton.addEventListener('click', function() {
+    backButton.addEventListener('click', function () {
         lastFloor(-1);
     });
-    nextButton.addEventListener('click', function() {
+    nextButton.addEventListener('click', function () {
         nextFloor(1);
     });
     loadModel(1);
