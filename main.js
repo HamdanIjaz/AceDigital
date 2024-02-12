@@ -48,10 +48,11 @@ if (webGLCompatibility) {
     environment.children.forEach((child) => {
         if (child.isPointLight) {
             pointLight = child;
+            pointLight.intensity = 1.5;
+
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
-    //console.log(scene.environment, scene );
     var param = {
         color: 0xf0e5dd
     };
@@ -61,14 +62,10 @@ if (webGLCompatibility) {
     gui.addColor(param, 'color').onChange(function () {
         pointLight.color.set(param.color);
         scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
-
     });
-    gui.add(pointLight, "intensity").min(-10).max(1000).name("environmentLight").onChange(function(){
-    scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
-
+    gui.add(pointLight, "intensity").min(-10).max(1000).name("environmentLight").onChange(function () {
+        scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
     });
-    //console.log(environment);
-    //document.body.appendChild(renderer.domElement);
 
     var params = {
         color: 0xfcf8ec
