@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     height: 100%;
     font-family: "Poppins", sans-serif;
+    overflow: hidden;
  }
  #canvas {
     width: 100%;
@@ -34,6 +35,7 @@ html, body {
  }
 
  .title {
+  display: none;
    color: white;
    z-index: 2;
    position: absolute;
@@ -43,7 +45,7 @@ html, body {
    transform: translate(-50%, -80%);
  }
  .dg.ac{
-z-index: 1 !important;
+    z-index: 1 !important;
  }
 
  #loading{
@@ -51,4 +53,12 @@ z-index: 1 !important;
   width: 50%;
   padding: 10px;
   text-align: center;
+ }
+
+ #backButton{
+  cursor: pointer;
+ }
+
+ #nextButton{
+  cursor: pointer;
  }

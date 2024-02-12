@@ -14,6 +14,16 @@ import * as dat from 'dat.gui';
 
 var webGLCompatibility = WebGL.isWebGLAvailable();
 if (webGLCompatibility) {
+    const floorsList = [
+        {
+            id: 1,
+            name: './Ace Apartment_GLB Embeded_M01.glb'
+        },
+        {
+            id: 2,
+            name: './Ace Apartment_GLB Embeded_M01.glb'
+        }
+    ]
     const gui = new dat.GUI();
     const scene = new THREE.Scene();
     //const stats = new Stats();
@@ -27,43 +37,6 @@ if (webGLCompatibility) {
     const container = document.getElementById('container');
 
     const loadingManager = new THREE.LoadingManager();
-    const textureLoader = new THREE.TextureLoader();
-    let cubeTexture;
-
-    // new RGBELoader()
-    // .setPath('./Textures/')
-    // .load('skybox.hdr', function (texture) {
-    //     texture.mapping = THREE.EquirectangularReflectionMapping;
-    //     texture.flipY = false;
-    //     cubeTexture = texture;
-    // });
-    // const lightMapTexture = new THREE.TextureLoader().load('./Textures/123.png');
-    // console.log(lightMapTexture);
-    // const baseIntTexturePath = './Textures/PBR_Interior';
-    // const walls = {
-    //     map: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Walls_Alpha_Mat_BaseColor.png'),
-    //     metalness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Walls_Alpha_Mat_Metallic.png'),
-    //     normal: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Walls_Alpha_Mat_Normal.png'),
-    //     roughness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Walls_Alpha_Mat_Roughness.png')
-    // };
-    // const mirrorStairs = {
-    //     map: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Mirriors&Stairs_Alpha_Mat_BaseColor.png'),
-    //     metalness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Mirriors&Stairs_Alpha_Mat_Metallic.png'),
-    //     normal: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Mirriors&Stairs_Alpha_Mat_Normal.png'),
-    //     roughness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Mirriors&Stairs_Alpha_Mat_Roughness.png')
-    // };
-    // const floorRags = {
-    //     map: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Floor&Rags&Curtons_Alpha_Mat_BaseColor.png'),
-    //     metalness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Floor&Rags&Curtons_Alpha_Mat_Metallic.png'),
-    //     normal: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Floor&Rags&Curtons_Alpha_Mat_Normal.png'),
-    //     roughness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Floor&Rags&Curtons_Alpha_Mat_Roughness.png')
-    // };
-    // const doorsWindows = {
-    //     map: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Doors&WIndows_Alpha_Mat_BaseColor.png'),
-    //     metalness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Doors&WIndows_Alpha_Mat_Metallic.png'),
-    //     normal: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Doors&WIndows_Alpha_Mat_Normal.png'),
-    //     roughness: textureLoader.load(baseIntTexturePath +'/Studio Apartment_Sub_Doors&WIndows_Alpha_Mat_Roughness.png')
-    // };
 
     //container.appendChild(stats.dom);
     const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
@@ -73,31 +46,30 @@ if (webGLCompatibility) {
     const pmremGenerator = new THREE.PMREMGenerator(renderer);
     const environment = new DebugEnvironment(renderer);
     environment.children.forEach((child) => {
-        if(child.isPointLight){
-            //console.log(child);
+        if (child.isPointLight) {
             child.intensity = 1.5;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
     //console.log(scene.environment, scene );
-    
+
     //console.log(environment);
     //document.body.appendChild(renderer.domElement);
-   
+
     var params = {
         color: 0xfcf8ec
     };
     const lightSource0 = new THREE.DirectionalLight(params.color, 0.37);
-    lightSource0.position.set(1,9,-1);
+    lightSource0.position.set(1, 9, -1);
     lightSource0.castShadow = true;
     scene.add(lightSource0);
-   
-    gui.addColor( params, 'color' )
-    .onChange( function() { lightSource0.color.set( params.color ); } );
+
+    gui.addColor(params, 'color')
+        .onChange(function () { lightSource0.color.set(params.color); });
     gui.add(lightSource0, "intensity").min(-10).max(10).name("directionalLight1Intensity");
-    gui.add(lightSource0.position, "x").min(-10).max(10).name("directionalLight1Position"  + " x");
-    gui.add(lightSource0.position, "y").min(-10).max(10).name("directionalLight1Position"  + " y");
-    gui.add(lightSource0.position, "z").min(-10).max(10).name("directionalLight1Position"  + " z");
+    gui.add(lightSource0.position, "x").min(-10).max(10).name("directionalLight1Position" + " x");
+    gui.add(lightSource0.position, "y").min(-10).max(10).name("directionalLight1Position" + " y");
+    gui.add(lightSource0.position, "z").min(-10).max(10).name("directionalLight1Position" + " z");
     // const lightSource1 = new THREE.DirectionalLight(pinkColor, pinkIntensity);
     // lightSource1.position.set(1, -2, -4);
     // scene.add(lightSource1);
@@ -105,104 +77,69 @@ if (webGLCompatibility) {
         color: 0xfff0e6
     };
     const lightSource2 = new THREE.DirectionalLight(params1.color, 0.75);
-    lightSource2.position.set(1,1,-1);
+    lightSource2.position.set(1, 1, -1);
     //lightSource2.castShadow = true;
-    
-    gui.addColor( params1, 'color' )
-    .onChange( function() { lightSource2.color.set( params1.color ); } );
+
+    gui.addColor(params1, 'color')
+        .onChange(function () { lightSource2.color.set(params1.color); });
     gui.add(lightSource2, "intensity").min(-10).max(10).name("directionalLightIntensity2");
-    gui.add(lightSource2.position, "x").min(-10).max(10).name("directionalLightPosition2"  + " x");
-    gui.add(lightSource2.position, "y").min(-10).max(10).name("directionalLightPosition2"  + " y");
-    gui.add(lightSource2.position, "z").min(-10).max(10).name("directionalLightPosition2"  + " z");
+    gui.add(lightSource2.position, "x").min(-10).max(10).name("directionalLightPosition2" + " x");
+    gui.add(lightSource2.position, "y").min(-10).max(10).name("directionalLightPosition2" + " y");
+    gui.add(lightSource2.position, "z").min(-10).max(10).name("directionalLightPosition2" + " z");
     scene.add(lightSource2);
     const dracoLoader = new DRACOLoader();
     dracoLoader.setDecoderPath('./loaders/dracoGltf/');
 
     const loader = new GLTFLoader();
-    let mixer;
+    let currentFloor, selectedFloor;
     loader.setDRACOLoader(dracoLoader);
-    loader.load('./Ace Apartment_GLB Embeded_M01.glb', function (gltfModel) {
-        const model = gltfModel.scene;
-        console.log(model);
-        model.scale.set(0.4, 0.4, 0.4);
-        model.traverse((child) => {
-            if (child.isMesh) {
-                const material = child.material;
-               
-                child.castShadow = true;
-                child.receiveShadow = true;
-                // if (child.name === "Mirriors&Stairs_Alpha") {
-                //     material.map = mirrorStairs.map;
-                //     material.metalnessMap = mirrorStairs.metalness;
-                //     material.normalMap = mirrorStairs.normal;
-                //     material.roughnessMap = mirrorStairs.roughness;
-                //     if(material.roughnessMap){
-                //         material.roughness = 1.0;
-                //     } 
-                //     if(material.metalnessMap){
-                //         material.metalness = 1.0;
-                //     }
+    function loadModel(floorNum) {
+        document.getElementById('floorNumber').innerHTML = floorNum;
+        if (currentFloor) {
+            scene.remove(currentFloor);
+        } else {
+            floorsList.forEach((val) => {
+                if (val.id === floorNum) {
+                    loader.load(val.name, function (gltfModel) {
+                        currentFloor = gltfModel.scene;
+                        
+                        currentFloor.scale.set(0.4, 0.4, 0.4);
+                        currentFloor.traverse((child) => {
+                            if (child.isMesh) {
+                                const material = child.material;
+                                child.castShadow = true;
+                                child.receiveShadow = true;
+                                if (material) {
+                                    material.metalness = 0;
+                                    material.roughness = 1;
+                                }
+                                console.log(child)
+                                if(child.name === 'Curtons_Transparent001' || child.name === 'Curtons_Transparent002'){
+                                    // material.opacity = 0.1;
+                                }
+                            }
+                        })
+                        scene.add(currentFloor);
+                        animate();
 
-                // }else if(child.name === "Walls_Alpha"){
-                //     material.map = walls.map;
-                //     material.metalnessMap = walls.metalness;
-                //     material.normalMap = walls.normal;
-                //     material.roughnessMap = walls.roughness;
-
-                //     if(material.roughnessMap){
-                //         material.roughness = 1.0;
-                //     } 
-                //     if(material.metalnessMap){
-                //         material.metalness = 1.0;
-                //     }
-
-                // }else if(child.name === "Doors&WIndows_Alpha_1"){
-                //     material.map = doorsWindows.map;
-                //     material.metalnessMap = doorsWindows.metalness;
-                //     material.normalMap = doorsWindows.normal;
-                //     material.roughnessMap = doorsWindows.roughness;
-
-                //     if(material.roughnessMap){
-                //         material.roughness = 1.0;
-                //     } 
-                //     if(material.metalnessMap){
-                //         material.metalness = 1.0;
-                //     }
-
-                // }
-
-                if (material) {
-                    // if(child.name == 'Curtons_Transparent'){
-                    //     console.log(material);
-                    //     material.transparent = true;
-                    //     material.opacity = 0.8
-                    // }
-                    // console.log(lightMapTexture)
-                    //material.map = lightMapTexture;
-                    //material.envMap = cubeTexture;
-                    // material.emissive = new THREE.Color(0xff5500);
-                    // material.emissiveIntensity = 0.009;
-                    
-                    material.metalness = 0;
-                    material.roughness = 1;
+                    }, function (xhr) {
+                        var loadingPercentage = xhr.loaded * 100 / xhr.total;
+                        if (Math.floor(loadingPercentage) < 100) {
+                            console.log(Math.floor(loadingPercentage))
+                            document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
+                        } else {
+                            setTimeout(() => {
+                                document.getElementById('loading').style.display = "none";
+                                console.log(document.getElementById('loading').style);
+                            }, 1500);
+                        }
+                    }, function (error) {
+                        console.error(error);
+                    });
                 }
-            }
-        })
-        scene.add(model);
-        animate();
-
-    }, function ( xhr ) {
-        var loadingPercentage = xhr.loaded * 100 / xhr.total;
-        if( Math.floor(loadingPercentage) <= 100){
-            document.getElementById('loading').innerHTML = 'The floor is ' + Math.floor(loadingPercentage) + '% loaded.';
-        }else {
-            setTimeout(()=>{
-                document.getElementById('loading').style.display = "none";
-            }, 1000);
+            })
         }
-    }, function (error) {
-        console.error(error);
-    });
+    }
     camera.position.x = 4;
     camera.position.y = 7;
     camera.position.z = 10;
@@ -223,10 +160,10 @@ if (webGLCompatibility) {
     modelControls.minDistance = initialMinZoom;
     modelControls.maxDistance = initialMaxZoom;
     gui.hide();
-    window.addEventListener('click', (event)=>{
-        if(event.ctrlKey && event.metaKey){
+    window.addEventListener('click', (event) => {
+        if (event.ctrlKey && event.metaKey) {
             gui.show();
-        }else if(event.altKey && event.metaKey){
+        } else if (event.altKey && event.metaKey) {
             gui.hide();
         }
     })
@@ -248,6 +185,29 @@ if (webGLCompatibility) {
         renderer.render(scene, camera);
     }
 
+    const backButton = document.querySelector('#backButton');
+    const nextButton = document.querySelector('#nextButton');
+
+    function lastFloor(num) {
+        if (selectedFloor) {
+            selectedFloor += num;
+        }
+       
+        loadModel(selectedFloor);
+    }
+    function nextFloor(num) {
+        if (selectedFloor) {
+            selectedFloor += num;
+        }
+        loadModel(selectedFloor);
+    }
+    backButton.addEventListener('click', function() {
+        lastFloor(-1);
+    });
+    nextButton.addEventListener('click', function() {
+        nextFloor(1);
+    });
+    loadModel(1);
 } else {
     const warning = WebGL.getWebGLErrorMessage();
     document.getElementById('container').appendChild(warning);
