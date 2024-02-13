@@ -46,15 +46,14 @@ if (webGLCompatibility) {
     environment.children.forEach((child) => {
         if (child.isPointLight) {
             pointLight = child;
-            pointLight.intensity = 50;
+            pointLight.intensity = 30;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
     var param = {
-        color: 0xf0e5dd
+        color: 0xffffff
     };
     console.log(pointLight)
-    pointLight.intensity = 50;
     pointLight.color.set(param.color);
     gui.addColor(param, 'color').onChange(function () {
         pointLight.color.set(param.color);
@@ -65,7 +64,7 @@ if (webGLCompatibility) {
     });
 
     var params = {
-        color: 0xfcf8ec
+        color: 0xffffff
     };
     const lightSource0 = new THREE.DirectionalLight(params.color, 0.37);
     lightSource0.position.set(1, 9, -1);
@@ -82,7 +81,7 @@ if (webGLCompatibility) {
     // lightSource1.position.set(1, -2, -4);
     // scene.add(lightSource1);
     var params1 = {
-        color: 0xfff0e6
+        color: 0xffffff
     };
     const lightSource2 = new THREE.DirectionalLight(params1.color, 0.75);
     lightSource2.position.set(1, 1, -1);
