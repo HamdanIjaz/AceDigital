@@ -37,8 +37,6 @@ if (webGLCompatibility) {
     const container = document.getElementById('container');
     let pointLight;
     const loadingManager = new THREE.LoadingManager();
-
-    //container.appendChild(stats.dom);
     const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
     renderer.shadowMap.enabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -48,8 +46,7 @@ if (webGLCompatibility) {
     environment.children.forEach((child) => {
         if (child.isPointLight) {
             pointLight = child;
-            pointLight.intensity = 1.5;
-
+            pointLight.intensity = 50;
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
@@ -57,7 +54,7 @@ if (webGLCompatibility) {
         color: 0xf0e5dd
     };
     console.log(pointLight)
-    pointLight.intensity = 1.5;
+    pointLight.intensity = 50;
     pointLight.color.set(param.color);
     gui.addColor(param, 'color').onChange(function () {
         pointLight.color.set(param.color);
