@@ -108,6 +108,7 @@ if (webGLCompatibility) {
             floorsList.forEach((val) => {
                 if (val.id === floorNum) {
                     loader.load(val.name, function (gltfModel) {
+                        console.log(gltfModel)
                         currentFloor = gltfModel.scene;
 
                         currentFloor.scale.set(0.4, 0.4, 0.4);
