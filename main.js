@@ -17,11 +17,11 @@ if (webGLCompatibility) {
     const floorsList = [
         {
             id: 1,
-            name: './Ace Apartment_GLB Embeded_M01.glb'
+            name: './groundFloor.glb'
         },
         {
             id: 2,
-            name: './Ace Apartment_GLB Embeded_M01.glb'
+            name: './firstFloor.glb'
         }
     ]
     const gui = new dat.GUI();
