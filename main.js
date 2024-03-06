@@ -22,6 +22,7 @@ if (webGLCompatibility) {
     ]
     const gui = new dat.GUI();
     const scene = new THREE.Scene();
+    const manager = new THREE.LoadingManager();
     //const stats = new Stats();
     scene.background = new THREE.Color(0xbfbfbf);
     const fieldOfView = 50;
@@ -133,16 +134,12 @@ if (webGLCompatibility) {
                         animate();
 
                     }, function (xhr) {
+                        console.log(xhr)
                         var loadingPercentage = xhr.loaded * 100 / xhr.total;
                         if (Math.floor(loadingPercentage) < 100) {
                             document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
                             document.querySelector('.w3-green').style.width =  Math.floor(loadingPercentage) + '%';
                            // document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
-                        } else {
-                            // setTimeout(() => {
-                            //     document.getElementById('nav').style.display = "none";
-                            //     document.getElementById('loading').style.display = "none";
-                            // }, 1500);
                         }
                     }, function (error) {
                         console.error(error);
