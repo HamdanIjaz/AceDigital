@@ -134,7 +134,7 @@ if (webGLCompatibility) {
                         animate();
 
                     }, function (xhr) {
-                        console.log(xhr)
+                        // console.log(xhr)
                         var loadingPercentage = xhr.loaded * 100 / xhr.total;
                         if (Math.floor(loadingPercentage) < 100) {
                             document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
@@ -142,7 +142,8 @@ if (webGLCompatibility) {
                            // document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
                         }
                     }, function (error) {
-                        console.error(error);
+                        // console.error(error);
+                        document.querySelector('.w3-green').innerHTML =  'A Network Error occured.';
                     });
                 }
             })
