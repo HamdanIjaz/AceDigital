@@ -2,14 +2,10 @@ import * as THREE from 'three';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import './style.css';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import GSAP from "gsap";
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import Stats from 'three/addons/libs/stats.module.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { DebugEnvironment } from 'three/addons/environments/DebugEnvironment.js';
-import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 import * as dat from 'dat.gui';
 
 var webGLCompatibility = WebGL.isWebGLAvailable();
@@ -50,10 +46,11 @@ if (webGLCompatibility) {
         }
     })
     scene.environment = pmremGenerator.fromScene(environment, 0.04).texture;
+    let mirrorCubeCamera = new THREE.CubeCamera( 0.1, 5000, 512 );
+    scene.add(mirrorCubeCamera);
     var param = {
         color: 0xffffff
     };
-    console.log(pointLight)
     pointLight.color.set(param.color);
     gui.addColor(param, 'color').onChange(function () {
         pointLight.color.set(param.color);
@@ -108,23 +105,27 @@ if (webGLCompatibility) {
             floorsList.forEach((val) => {
                 if (val.id === floorNum) {
                     loader.load(val.name, function (gltfModel) {
-                        console.log(gltfModel)
                         currentFloor = gltfModel.scene;
 
                         currentFloor.scale.set(0.4, 0.4, 0.4);
                         currentFloor.traverse((child) => {
                             if (child.isMesh) {
-                                const material = child.material;
+                                let material = child.material;
                                 child.castShadow = true;
                                 child.receiveShadow = true;
                                 if (material) {
                                     material.metalness = 0;
                                     material.roughness = 1;
                                 }
-                                console.log(child)
-                                if (child.name === "Curtons_Transparent") {
+
+                                if (child.name === 'Curtons_Transparent') {
                                     material.transparent = true;
                                     material.opacity = 0.7;
+                                    material.side = THREE.DoubleSide;
+                                }
+                                if (material.name === 'Transparent_Glass') {
+                                    material.transparent = true;
+                                    material.opacity = 0.3;
                                 }
                             }
                         })
@@ -134,14 +135,14 @@ if (webGLCompatibility) {
                     }, function (xhr) {
                         var loadingPercentage = xhr.loaded * 100 / xhr.total;
                         if (Math.floor(loadingPercentage) < 100) {
-                            console.log(Math.floor(loadingPercentage))
-                            document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
+                            document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
+                            document.querySelector('.w3-green').style.width =  Math.floor(loadingPercentage) + '%';
+                           // document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
                         } else {
-                            setTimeout(() => {
-                                document.getElementById('nav').style.display = "none";
-                                document.getElementById('loading').style.display = "none";
-                                console.log(document.getElementById('loading').style);
-                            }, 1500);
+                            // setTimeout(() => {
+                            //     document.getElementById('nav').style.display = "none";
+                            //     document.getElementById('loading').style.display = "none";
+                            // }, 1500);
                         }
                     }, function (error) {
                         console.error(error);
