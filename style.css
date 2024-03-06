@@ -47,7 +47,11 @@ html, body {
  .dg.ac{
     z-index: 1 !important;
  }
-
+.progress-bar-container{
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
  #loading{
   margin: auto;
   width: 50%;
