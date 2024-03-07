@@ -140,8 +140,8 @@ if (webGLCompatibility) {
                             document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
                             document.querySelector('.w3-green').style.width =  Math.floor(loadingPercentage) + '%';
                         }else if (xhr.total === 0) {
-                            document.querySelector('.w3-green').innerHTML = 'Loading...';
-                            document.querySelector('.w3-green').style.width = ((xhr.loaded / 1024) % 100) + 'kb'; // Display loaded bytes
+                            document.querySelector('.w3-green').innerHTML = ((xhr.loaded / 1024) % 100) + 'kb';
+                            //document.querySelector('.w3-green').style.width = ((xhr.loaded / 1024) % 100) + 'kb'; // Display loaded bytes
                         }
                     }, function (error) {
                         // console.error(error);
