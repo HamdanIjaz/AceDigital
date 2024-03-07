@@ -17,7 +17,7 @@ if (webGLCompatibility) {
     const floorsList = [
         {
             id: 1,
-            name: './1st_M01_Max GLB Version.glb'
+            name: './1st_M01_Max_GLB_Version.glb'
         },
         {
             id: 2,
