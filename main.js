@@ -135,11 +135,10 @@ if (webGLCompatibility) {
 
                     }, function (xhr) {
                         console.log(xhr)
-                        var loadingPercentage = xhr.loaded * 100 / xhr.total;
-                        if (Math.floor(loadingPercentage) < 100) {
+                        var loadingPercentage = (xhr.loaded / xhr.total)* 100;
+                        if (Math.floor(loadingPercentage) <= 100) {
                             document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
                             document.querySelector('.w3-green').style.width =  Math.floor(loadingPercentage) + '%';
-                           // document.getElementById('loading').innerHTML = 'Current floor is ' + Math.floor(loadingPercentage) + '% loaded.';
                         }
                     }, function (error) {
                         // console.error(error);
