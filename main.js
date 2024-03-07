@@ -101,7 +101,6 @@ if (webGLCompatibility) {
     let currentFloor, selectedFloor;
     loader.setDRACOLoader(dracoLoader);
     function loadModel(floorNum) {
-        document.getElementById('floorNumber').innerHTML = floorNum;
         if (currentFloor) {
             scene.remove(currentFloor);
         } else {
