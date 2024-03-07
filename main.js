@@ -136,7 +136,7 @@ if (webGLCompatibility) {
                     }, function (xhr) {
                         console.log(xhr)
                         var loadingPercentage = (xhr.loaded / xhr.total) * 100;
-                        if (Math.floor(loadingPercentage) <= 100) {
+                        if (Math.floor(loadingPercentage)) {
                             document.querySelector('.w3-green').innerHTML =  Math.floor(loadingPercentage) + '%';
                             document.querySelector('.w3-green').style.width =  Math.floor(loadingPercentage) + '%';
                         }
