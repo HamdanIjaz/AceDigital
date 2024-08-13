@@ -17,7 +17,7 @@ if (webGLCompatibility) {
     const floorsList = [
         {
             id: 1,
-            name: './1st_M01_Max_GLB_Version.glb'
+            name: './gf.glb'
         },
         {
             id: 2,
@@ -110,7 +110,7 @@ if (webGLCompatibility) {
                         console.log(gltfModel)
                         currentFloor = gltfModel.scene;
 
-                        currentFloor.scale.set(0.4, 0.4, 0.4);
+                        currentFloor.scale.set(0.35, 0.35, 0.35);
                         currentFloor.traverse((child) => {
                             if (child.isMesh) {
                                 const material = child.material;
